@@ -19,7 +19,7 @@ The proposed neural network in the article by Gabel and Timoshenko creates embed
 Here’s a simplified explanation of how each component is processed:
 
 ### 1. **Purchase History Embeddings**
-   The purchase history $ B_T $ is a sparse binary vector that records whether a customer has purchased each product over a specific time window (length $ T $).
+   The purchase history $B_T$ is a sparse binary vector that records whether a customer has purchased each product over a specific time window (length $ T $).
 
    - **Time-series filters** are applied to summarize this sparse purchase data. These filters automatically adjust for different interpurchase times between products (e.g., milk is purchased more frequently than detergent). The output is a dense summary, $ B_H $, of the customer’s recent purchases.
    - Bottleneck layers $ W_H $ are then applied to the transformed purchase histories, reducing the dimensionality and generating low-dimensional embeddings for each product based on its purchase history. This helps capture how recent purchases influence future buying behavior.
