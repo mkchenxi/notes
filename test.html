@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Lookup</title>
+</head>
+<body>
+  <h2>Find Your Coach and Coreader</h2>
+  <input type="text" id="studentIdInput" placeholder="Enter your student ID">
+  <button onclick="lookupStudent()">Submit</button>
+
+  <div id="result" style="margin-top:20px;"></div>
+
+  <script>
+    const studentData = {
+      "123456": {
+        coach: "Dr. Smith",
+        coreader: "Prof. Johnson",
+        meeting: "https://example.com/meet/123456"
+      },
+      "789101": {
+        coach: "Ms. Lee",
+        coreader: "Mr. Brown",
+        meeting: "https://example.com/meet/789101"
+      }
+    };
+
+    function lookupStudent() {
+      const input = document.getElementById("studentIdInput").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (studentData[input]) {
+        const data = studentData[input];
+        resultDiv.innerHTML = `
+          <p><strong>Coach:</strong> ${data.coach}</p>
+          <p><strong>Coreader:</strong> ${data.coreader}</p>
+          <p><strong>Meeting Link:</strong> <a href="${data.meeting}" target="_blank">${data.meeting}</a></p>
+        `;
+      } else {
+        resultDiv.innerHTML = "<p style='color:red;'>Student ID not found.</p>";
+      }
+    }
+  </script>
+</body>
+</html>
