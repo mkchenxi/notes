@@ -359,7 +359,7 @@ To get moving quickly:
 
 Then Simulation 1B can add the stress-test curve under changing mixture weights.
 
-## 14. Tuning the radius $\varepsilon$ and regularization parameter $\lambda$
+## 14. Tuning the radius $\epsilon$ and regularization parameter $\lambda$
 
 ### Choosing the Wasserstein radius and benchmark regularization parameters
 
@@ -381,7 +381,7 @@ We select the Wasserstein radius ($\epsilon$) for DRO-LAD and the regularization
 ```
 where $|X'y|*\infty=\max_j |x_j'y|$ and $\text{lin}(a,b,50)$ denotes 50 equally spaced points between $a$ and $b$. This is the same style of grid used by Chen and Paschalidis in their numerical work for tuning robustness and regularization parameters.  We then estimate the model for each candidate value in $\mathcal G$ and choose the value that minimizes the average validation LAD loss,
 ```math
-\frac{1}{n*{\mathrm{val}}}\sum_{i\in \mathrm{val}} |y_i-x_i'\hat\beta(\tau)|,
+\frac{1}{n_{\mathrm{val}}}\sum_{i\in \mathrm{val}} |y_i-x_i'\hat\beta(\tau)|,
 ```
 where $\tau$ denotes either $\epsilon$ or $\lambda$. For DRO, the selected $\epsilon$ retains its substantive interpretation as the size of the local Wasserstein ambiguity set, whereas for penalized LAD the selected $\lambda$ is interpreted as a shrinkage weight.
 
