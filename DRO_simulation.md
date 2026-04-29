@@ -256,10 +256,9 @@ For each Monte Carlo replication:
 3. Draw $\varepsilon_i \sim N(0,\sigma^2)$.
 4. Construct
 
-   $$
+   ```math
    Y_i = 1\cdot X_{i2} + \beta_3(U_i) X_{i3} + \varepsilon_i,
-   $$
-
+   ```
    with $\beta_3(A)=1.5$, $\beta_3(B)=-0.5$.
 
 ### Preprocess
