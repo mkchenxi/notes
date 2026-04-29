@@ -274,7 +274,7 @@ For each Monte Carlo replication:
    $$
    \hat\beta^{\text{ERM}}
    \in
-   \arg\min_{\beta}\frac{1}{n}\sum_i |Y_i-X_i'\beta|.
+   \arg\min_{\beta}\frac{1}{n}\sum_i |Y_i-X_i'\beta|
    $$
 
 ### Fit DRO-LAD
@@ -287,7 +287,7 @@ For each Monte Carlo replication:
    \arg\min_{\beta}
    \frac{1}{n}\sum_i |Y_i-X_i'\beta|
    +
-   \epsilon \sqrt{\|\beta\|_2^2+1}.
+   \epsilon \sqrt{\|\beta\|_2^2+1}
    $$
 
 9. Choose the best $\epsilon$ by CV.
