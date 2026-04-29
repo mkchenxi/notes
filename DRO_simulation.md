@@ -371,7 +371,7 @@ We select the Wasserstein radius ($\epsilon$) for DRO-LAD and the regularization
 \left{
 \sqrt{
 \exp!\Big(
-\operatorname{lin}\big(
+\text{lin}\big(
 \log(0.005|X'y|*\infty),
 \log(|X'y|*\infty),
 50
@@ -380,7 +380,7 @@ We select the Wasserstein radius ($\epsilon$) for DRO-LAD and the regularization
 }
 \right},
 ```
-where $|X'y|*\infty=\max_j |x_j'y|$ and $\operatorname{lin}(a,b,50)$ denotes 50 equally spaced points between $a$ and $b$. This is the same style of grid used by Chen and Paschalidis in their numerical work for tuning robustness and regularization parameters.  We then estimate the model for each candidate value in $\mathcal G$ and choose the value that minimizes the average validation LAD loss,
+where $|X'y|*\infty=\max_j |x_j'y|$ and $\text{lin}(a,b,50)$ denotes 50 equally spaced points between $a$ and $b$. This is the same style of grid used by Chen and Paschalidis in their numerical work for tuning robustness and regularization parameters.  We then estimate the model for each candidate value in $\mathcal G$ and choose the value that minimizes the average validation LAD loss,
 ```math
 \frac{1}{n*{\mathrm{val}}}\sum_{i\in \mathrm{val}} |y_i-x_i'\hat\beta(\tau)|,
 ```
