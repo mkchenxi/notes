@@ -367,7 +367,6 @@ We select the Wasserstein radius ($\epsilon$) for DRO-LAD and the regularization
 ```math
 \mathcal G
 ==========
-
 \left{
 \sqrt{
 \exp!\Big(
