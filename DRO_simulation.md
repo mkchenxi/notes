@@ -365,19 +365,19 @@ Then Simulation 1B can add the stress-test curve under changing mixture weights.
 
 We select the Wasserstein radius ($\epsilon$) for DRO-LAD and the regularization parameter ($\lambda$) for penalized LAD empirically using a data-adaptive validation procedure. Chen and Paschalidis note that, although theory can guide radius choice through concentration arguments, in practice cross-validation is usually used because the true distribution is unknown.  For each Monte Carlo replication, after standardizing the predictors using the training subsample, we construct a common log-spaced tuning grid based on the scale of the sample cross-products between ($X$) and ($y$):
 ```math
-\mathcal G
-==========
-\left{
+\mathcal{G}
+=
+\left\{
 \sqrt{
-\exp!\Big(
-\text{lin}\big(
-\log(0.005|X'y|*\infty),
-\log(|X'y|*\infty),
+\exp\!\Big(
+\mathrm{lin}\big(
+\log(0.005\lvert X'y\rvert \cdot \infty),
+\log(\lvert X'y\rvert \cdot \infty),
 50
 \big)
 \Big)
 }
-\right},
+\right\}
 ```
 where $|X'y|*\infty=\max_j |x_j'y|$ and $\text{lin}(a,b,50)$ denotes 50 equally spaced points between $a$ and $b$. This is the same style of grid used by Chen and Paschalidis in their numerical work for tuning robustness and regularization parameters.  We then estimate the model for each candidate value in $\mathcal G$ and choose the value that minimizes the average validation LAD loss,
 ```math
