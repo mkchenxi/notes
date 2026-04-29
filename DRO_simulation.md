@@ -358,3 +358,34 @@ To get moving quickly:
 * focus Simulation 1A purely on **selection of $X_2$ vs $X_3$**
 
 Then Simulation 1B can add the stress-test curve under changing mixture weights.
+
+## 14. Tuning the radius $\varepsilon$ and regularization parameter $\lambda$
+
+### Choosing the Wasserstein radius and benchmark regularization parameters
+
+We select the Wasserstein radius ($\epsilon$) for DRO-LAD and the regularization parameter ($\lambda$) for penalized LAD empirically using a data-adaptive validation procedure. Chen and Paschalidis note that, although theory can guide radius choice through concentration arguments, in practice cross-validation is usually used because the true distribution is unknown.  For each Monte Carlo replication, after standardizing the predictors using the training subsample, we construct a common log-spaced tuning grid based on the scale of the sample cross-products between ($X$) and ($y$):
+```math
+\mathcal G
+==========
+
+\left{
+\sqrt{
+\exp!\Big(
+\operatorname{lin}\big(
+\log(0.005|X'y|*\infty),
+\log(|X'y|*\infty),
+50
+\big)
+\Big)
+}
+\right},
+```
+where $|X'y|*\infty=\max_j |x_j'y|$ and $\operatorname{lin}(a,b,50)$ denotes 50 equally spaced points between $a$ and $b$. This is the same style of grid used by Chen and Paschalidis in their numerical work for tuning robustness and regularization parameters.  We then estimate the model for each candidate value in $\mathcal G$ and choose the value that minimizes the average validation LAD loss,
+```math
+\frac{1}{n*{\mathrm{val}}}\sum_{i\in \mathrm{val}} |y_i-x_i'\hat\beta(\tau)|,
+```
+where $\tau$ denotes either $\epsilon$ or $\lambda$. For DRO, the selected $\epsilon$ retains its substantive interpretation as the size of the local Wasserstein ambiguity set, whereas for penalized LAD the selected $\lambda$ is interpreted as a shrinkage weight.
+
+### Tuning workflow
+
+For Simulation 1A, I would recommend a **train-validation split** rather than full $K$-fold cross-validation. The reason is practical: the DRO estimator already has to be solved repeatedly over a tuning grid, and your simulation will be repeated many times, so a single validation split is a much lighter way to get the project moving. Chen and Paschalidis emphasize that cross-validation is practical but can be computationally expensive, which is especially relevant here because you are comparing ERM, penalized LAD, and DRO-LAD over many replications.  A simple workflow is: split each simulated sample into 60% training, 20% validation, and 20% final holdout. Estimate each candidate model on the training portion only, evaluate its empirical LAD loss on the validation portion, and select the value of $\epsilon$ or $\lambda$ that yields the lowest validation loss. After tuning is complete, refit the chosen specification on the combined training-plus-validation sample and use the remaining holdout only for reporting final performance if you want a clean out-of-sample number. The quantity minimized during tuning is therefore **validation empirical loss**, not final test loss. If later you want a more stable tuning rule, you can replace the single validation split with 5-fold cross-validation using the same grid and the same validation criterion, but for the first simulation a train-validation split is the simpler and faster choice. This is also consistent with your paper’s broader point that ordinary cross-validation mainly assesses predictive performance in an approximately i.i.d. regime, while the DRO parameter is meant to control protection against nearby distributional perturbations.
