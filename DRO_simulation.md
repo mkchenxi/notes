@@ -271,24 +271,25 @@ For each Monte Carlo replication:
 
 7. Solve
 
-   $$
-   \hat\beta^{\text{ERM}}
-   \in
-   \arg\min_{\beta}\frac{1}{n}\sum_i |Y_i-X_i'\beta|
-   $$
+```math
+\hat{\beta}^{\text{ERM}}
+\in
+\arg\min_{\beta}
+\frac{1}{n}\sum_i |Y_i-X_i'\beta|
+```
 
 ### Fit DRO-LAD
 
 8. For each $\epsilon$ in the grid, solve
 
-   $$
-   \hat\beta^{\text{DRO}}(\epsilon)
-   \in
-   \arg\min_{\beta}
-   \frac{1}{n}\sum_i |Y_i-X_i'\beta|
-   +
-   \epsilon \sqrt{\|\beta\|_2^2+1}
-   $$
+  ```math
+\hat{\beta}^{\text{DRO}}(\epsilon)
+\in
+\arg\min_{\beta}
+\frac{1}{n}\sum_i |Y_i-X_i'\beta|
++
+\epsilon \sqrt{\|\beta\|_2^2+1}
+```
 
 9. Choose the best $\epsilon$ by CV.
 
